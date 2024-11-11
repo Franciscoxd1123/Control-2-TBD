@@ -4,7 +4,6 @@ import com.example.GestorDeTareas.models.Tarea;
 import com.example.GestorDeTareas.repositories.TareaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

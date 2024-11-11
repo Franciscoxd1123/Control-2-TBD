@@ -1,7 +1,6 @@
 package com.example.GestorDeTareas.repositories;
 
 import com.example.GestorDeTareas.models.Tarea;
-
 import java.util.List;
 
 public interface TareaRepository {
