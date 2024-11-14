@@ -2,11 +2,14 @@ package com.example.GestorDeTareas.repositories;
 
 import com.example.GestorDeTareas.models.Tarea;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
+import org.sql2o.Query;
 import org.sql2o.Sql2o;
 
 import java.util.List;
 
+@Repository
 public class TareaRepositoryImp implements TareaRepository{
 
     @Autowired
@@ -89,6 +92,36 @@ public class TareaRepositoryImp implements TareaRepository{
         }
         catch (Exception e) {
             System.out.println("Error al eliminar la tarea: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Tarea> buscarTareas(String estado, String palabraClave) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM Tareas WHERE 1=1");
+
+        if (estado != null && !estado.isEmpty()) {
+            sql.append(" AND estado = :estado");
+        }
+
+        if (palabraClave != null && !palabraClave.isEmpty()) {
+            sql.append(" AND (LOWER(titulo) LIKE LOWER(:palabraClave) OR LOWER(descripcion) LIKE LOWER(:palabraClave))");
+        }
+
+        try (Connection con = sql2o.open()) {
+            Query query = con.createQuery(sql.toString());
+
+            if (estado != null && !estado.isEmpty()) {
+                query.addParameter("estado", estado);
+            }
+
+            if (palabraClave != null && !palabraClave.isEmpty()) {
+                query.addParameter("palabraClave", "%" + palabraClave + "%");
+            }
+
+            return query.executeAndFetch(Tarea.class);
+        } catch (Exception e) {
+            System.out.println("Error al buscar tareas: " + e.getMessage());
+            return null;
         }
     }
 }

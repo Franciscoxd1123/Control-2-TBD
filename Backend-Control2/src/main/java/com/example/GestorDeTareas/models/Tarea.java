@@ -11,4 +11,5 @@ public class Tarea {
     private String descripcion;
     private String estado;
     private Date fechaVencimiento;
+    private int idUsuario;
 }

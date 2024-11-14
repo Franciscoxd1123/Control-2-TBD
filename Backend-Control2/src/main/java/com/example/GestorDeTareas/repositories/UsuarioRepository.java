@@ -14,4 +14,10 @@ public interface UsuarioRepository {
     Usuario update(Usuario usuario, int id);
 
     void delete(int id);
+
+    boolean existeCorreo(String correo);
+
+    Usuario findByCorreoAndContrasena(String correo, String contrasena);
+
+    void actualizarEstadoSesion(Long idUsuario, boolean activo);
 }

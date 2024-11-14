@@ -14,4 +14,6 @@ public interface TareaRepository {
     Tarea update(Tarea tarea, int id);
 
     void delete(int id);
+
+    List<Tarea> buscarTareas(String estado, String palabraClave);
 }

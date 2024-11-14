@@ -32,10 +32,30 @@ public class TareaController {
         return ResponseEntity.ok(tarea);
     }
 
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Tarea>> buscarTareas(
+            @RequestParam(required = false) String estado,
+            @RequestParam(required = false) String palabraClave) {
+        List<Tarea> tareas = tareaService.buscarTareas(estado, palabraClave);
+        return ResponseEntity.ok(tareas);
+    }
+
+    @GetMapping("/notificaciones/{idUsuario}")
+    public ResponseEntity<List<String>> obtenerNotificaciones(@PathVariable int idUsuario) {
+        List<String> notificaciones = tareaService.obtenerNotificaciones(idUsuario);
+        return ResponseEntity.ok(notificaciones);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Tarea> updateTarea(@RequestBody Tarea tarea, @PathVariable int id){
         Tarea tareaUpdated = tareaService.updateTarea(tarea, id);
         return ResponseEntity.ok(tareaUpdated);
+    }
+
+    @PutMapping("/{id}/completar")
+    public ResponseEntity<Tarea> completarTarea(@PathVariable int id) {
+        Tarea tareaCompletada = tareaService.completarTarea(id);
+        return ResponseEntity.ok(tareaCompletada);
     }
 
     @DeleteMapping("/{id}")

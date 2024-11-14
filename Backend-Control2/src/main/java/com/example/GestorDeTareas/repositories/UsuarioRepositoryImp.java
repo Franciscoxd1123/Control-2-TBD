@@ -91,4 +91,48 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
             System.out.println("Error al eliminar el usuario: " + e.getMessage());
         }
     }
+
+    @Override
+    public boolean existeCorreo(String correo) {
+        String sql = "SELECT COUNT(*) FROM Usuarios WHERE correo = :correo";
+        try (Connection con = sql2o.open()) {
+            int count = con.createQuery(sql)
+                    .addParameter("correo", correo)
+                    .executeScalar(Integer.class);
+            return count > 0;
+        } catch (Exception e) {
+            System.out.println("Error al verificar el correo: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public Usuario findByCorreoAndContrasena(String correo, String contrasena) {
+        String sql = "SELECT * FROM Usuarios WHERE correo = :correo AND contrasena = :contrasena";
+
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .addParameter("correo", correo)
+                    .addParameter("contrasena", contrasena)
+                    .executeAndFetchFirst(Usuario.class);
+        } catch (Exception e) {
+            System.out.println("Error al intentar iniciar sesión: " + e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public void actualizarEstadoSesion(Long idUsuario, boolean activo) {
+        String sql = "UPDATE Usuarios SET sesion_activa = :activo WHERE idUsuario = :idUsuario";
+
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("idUsuario", idUsuario)
+                    .addParameter("activo", activo)
+                    .executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error al actualizar estado de sesión: " + e.getMessage());
+            throw new IllegalArgumentException("Error al cerrar sesión");
+        }
+    }
 }
