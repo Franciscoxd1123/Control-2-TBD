@@ -1,14 +1,18 @@
 package com.example.GestorDeTareas.config;
 
+import org.sql2o.Sql2o;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.sql2o.Sql2o;
 
 @Configuration
 public class Sql2oConfig {
 
     @Bean
     public Sql2o sql2o() {
-        return new Sql2o("jdbc:postgresql://localhost:5432/GestorDeTareas", "username", "pasword");
+        // Configura la conexión a tu base de datos
+        String url = "jdbc:postgresql://localhost:5432/GestorDeTareas";
+        String username = "postgres";
+        String password = "MyPostgre74SQL38";
+        return new Sql2o(url, username, password);
     }
 }

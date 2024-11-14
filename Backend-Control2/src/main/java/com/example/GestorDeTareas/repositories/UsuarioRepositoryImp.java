@@ -18,7 +18,7 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
     public Usuario create(Usuario usuario){
         String sql = "INSERT INTO Usuarios (nombre, correo, contrasena) " +
                 "VALUES (:nombre, :correo, :contrasena) " +
-                "RETURNING idUsuario";
+                "RETURNING idusuario";
         try (Connection con = sql2o.open()) {
             Long id = con.createQuery(sql, true)
                     .addParameter("nombre", usuario.getNombre())
@@ -50,7 +50,7 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
 
     @Override
     public Usuario getUsuarioId(int id){
-        String sql = "SELECT * FROM Usuarios WHERE idUsuario = :id";
+        String sql = "SELECT * FROM Usuarios WHERE idusuario = :id";
 
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql).addParameter("id",id).executeAndFetchFirst(Usuario.class);
@@ -63,7 +63,7 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
 
     @Override
     public Usuario update(Usuario usuario, int id){
-        String sql = "UPDATE Usuarios SET nombre = :nombre, correo = :correo, contrasena = :contrasena WHERE idUsuario = :id";
+        String sql = "UPDATE Usuarios SET nombre = :nombre, correo = :correo, contrasena = :contrasena WHERE idusuario = :id";
 
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
@@ -82,7 +82,7 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
 
     @Override
     public void delete(int id){
-        String sql = "DELETE FROM Usuarios WHERE idUsuario = :id";
+        String sql = "DELETE FROM Usuarios WHERE idusuario = :id";
 
         try (Connection con = sql2o.open()){
             con.createQuery(sql).addParameter("id",id).executeUpdate();
@@ -123,11 +123,11 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
 
     @Override
     public void actualizarEstadoSesion(Long idUsuario, boolean activo) {
-        String sql = "UPDATE Usuarios SET sesion_activa = :activo WHERE idUsuario = :idUsuario";
+        String sql = "UPDATE Usuarios SET sesionactiva = :activo WHERE idusuario = :idusuario";
 
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
-                    .addParameter("idUsuario", idUsuario)
+                    .addParameter("idusuario", idUsuario)
                     .addParameter("activo", activo)
                     .executeUpdate();
         } catch (Exception e) {

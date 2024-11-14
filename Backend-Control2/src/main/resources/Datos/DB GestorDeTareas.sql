@@ -4,27 +4,27 @@ DROP TABLE IF EXISTS Usuarios;
 DROP TABLE IF EXISTS Tareas;
 
 CREATE TABLE Usuarios(
-	id_usuario SERIAL NOT NULL,
+	idUsuario SERIAL NOT NULL,
 	nombre VARCHAR(100),
 	correo VARCHAR(100),
 	contrasena VARCHAR(100),
-	sesion_activa boolean,
-	PRIMARY KEY (id_usuario)
+	sesionActiva boolean,
+	PRIMARY KEY (idUsuario)
 );
 
 CREATE TABLE Tareas(
-	id_tarea SERIAL NOT NULL,
+	idTarea SERIAL NOT NULL,
 	titulo VARCHAR(100),
 	descripcion TEXT,
 	estado VARCHAR(20),
-	fecha_vencimiento DATE,
-	id_usuario INT,
-	PRIMARY KEY (id_tarea),
-	FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
+	fechaVencimiento DATE,
+	idUsuario INT,
+	PRIMARY KEY (idTarea),
+	FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario)
 );
 
 -- Tabla Usuarios
-INSERT INTO Usuarios (nombre, correo, contrasena, sesion_activa) VALUES
+INSERT INTO Usuarios (nombre, correo, contrasena, sesionActiva) VALUES
 ('Juan Perez', 'juan.perez@example.com', 'password123', FALSE),
 ('Maria Gomez', 'maria.gomez@example.com', 'pass456', FALSE),
 ('Carlos Diaz', 'carlos.diaz@example.com', 'securePass789', FALSE),
@@ -32,7 +32,7 @@ INSERT INTO Usuarios (nombre, correo, contrasena, sesion_activa) VALUES
 ('Lucia Rojas', 'lucia.rojas@example.com', 'myPass321', FALSE);
 
 -- Tabla Tareas
-INSERT INTO Tareas (titulo, descripcion, estado, fecha_vencimiento, id_usuario) VALUES
+INSERT INTO Tareas (titulo, descripcion, estado, fechaVencimiento, idUsuario) VALUES
 ('Revisión de código', 'Revisar el código del último commit', 'pendiente', '2024-11-20', 1),
 ('Escribir documentación', 'Crear documentación para el módulo de usuarios', 'pendiente', '2024-11-22', 2),
 ('Reunión con el equipo', 'Reunión semanal de planificación', 'completada', '2024-11-15', 3),

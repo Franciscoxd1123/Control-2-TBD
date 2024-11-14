@@ -17,15 +17,16 @@ public class TareaRepositoryImp implements TareaRepository{
 
     @Override
     public Tarea create(Tarea tarea){
-        String sql = "INSERT INTO Tareas (titulo, descripcion, estado, fechaVencimiento) " +
-                "VALUES (:titulo, :descripcion, :estado, :fechaVencimiento) " +
-                "RETURNING idTarea";
+        String sql = "INSERT INTO Tareas (titulo, descripcion, estado, fechavencimiento, idusuario) " +
+                "VALUES (:titulo, :descripcion, :estado, :fechavencimiento, :idusuario) " +
+                "RETURNING idtarea";
         try (Connection con = sql2o.open()) {
             Long id = con.createQuery(sql, true)
                     .addParameter("titulo", tarea.getTitulo())
                     .addParameter("descripcion", tarea.getDescripcion())
                     .addParameter("estado", tarea.getEstado())
-                    .addParameter("fechaVencimiento", tarea.getFechaVencimiento())
+                    .addParameter("fechavencimiento", tarea.getFechaVencimiento())
+                    .addParameter("idusuario", tarea.getIdUsuario())
                     .executeAndFetchFirst(Long.class);
 
             tarea.setIdTarea(id);
@@ -52,7 +53,7 @@ public class TareaRepositoryImp implements TareaRepository{
 
     @Override
     public Tarea getTareaId(int id){
-        String sql = "SELECT * FROM Tareas WHERE idTarea = :id";
+        String sql = "SELECT * FROM Tareas WHERE idtarea = :id";
 
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql).addParameter("id",id).executeAndFetchFirst(Tarea.class);
@@ -65,7 +66,7 @@ public class TareaRepositoryImp implements TareaRepository{
 
     @Override
     public Tarea update(Tarea tarea, int id){
-        String sql = "UPDATE Tareas SET titulo = :titulo, descripcion = :descripcion, estado = :estado, fechaVencimiento = :fechaVencimiento WHERE idTarea = :id";
+        String sql = "UPDATE Tareas SET titulo = :titulo, descripcion = :descripcion, estado = :estado, fechavencimiento = :fechavencimiento, idusuario = :idusuario WHERE idtarea = :id";
 
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
@@ -73,7 +74,8 @@ public class TareaRepositoryImp implements TareaRepository{
                     .addParameter("titulo", tarea.getTitulo())
                     .addParameter("descripcion", tarea.getDescripcion())
                     .addParameter("estado", tarea.getEstado())
-                    .addParameter("fechaVencimiento", tarea.getFechaVencimiento())
+                    .addParameter("fechavencimiento", tarea.getFechaVencimiento())
+                    .addParameter("idusuario", tarea.getIdUsuario())
                     .executeUpdate();
             return tarea;
         }
@@ -85,7 +87,7 @@ public class TareaRepositoryImp implements TareaRepository{
 
     @Override
     public void delete(int id){
-        String sql = "DELETE FROM Tareas WHERE idTarea = :id";
+        String sql = "DELETE FROM Tareas WHERE idtarea = :id";
 
         try (Connection con = sql2o.open()){
             con.createQuery(sql).addParameter("id",id).executeUpdate();
