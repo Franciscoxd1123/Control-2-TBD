@@ -8,42 +8,34 @@ const apiClient = axios.create({
 });
 
 export default {
-    // Crear un usuario nuevo
     createUsuario(data) {
         return apiClient.post('/', data);
     },
 
-    // Registrar un usuario
     registrarUsuario(data) {
         return apiClient.post('/registro', data);
     },
 
-    // Login de usuario
-    loginUsuario(data) {
-        return apiClient.post('/login', data);
+    loginUsuario(correo, contrasena) {
+        return apiClient.post('/login', { correo, contrasena });
     },
 
-    // Logout de usuario 
-    logoutUsuario(id) { 
-        return apiClient.post(`/logout/${id}`);
+    logoutUsuario(idUsuario) { 
+        return apiClient.post(`/logout/${idUsuario}`);
     },
 
-    // Obtener la lista de usuarios
     listUsuarios() {
         return apiClient.get('/');
     },
 
-    // Obtener un usuario por id
     getUsuario(id) {
         return apiClient.get(`/${id}`);
     },
     
-    // Actualizar un usuario por id
     updateUsuario(id, data) {
         return apiClient.put(`/${id}`, data);
     },
 
-    // Eliminar un usuario por id
     deleteUsuario(id) {
         return apiClient.delete(`/${id}`);
     },

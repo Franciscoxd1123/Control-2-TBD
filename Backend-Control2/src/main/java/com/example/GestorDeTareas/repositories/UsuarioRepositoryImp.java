@@ -20,13 +20,14 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
                 "VALUES (:nombre, :correo, :contrasena) " +
                 "RETURNING idusuario";
         try (Connection con = sql2o.open()) {
-            Long id = con.createQuery(sql, true)
+            int id = con.createQuery(sql, true)
                     .addParameter("nombre", usuario.getNombre())
                     .addParameter("correo", usuario.getCorreo())
                     .addParameter("contrasena", usuario.getContrasena())
-                    .executeAndFetchFirst(Long.class);
+                    .executeUpdate()
+                    .getKey(int.class);
 
-            usuario.setIdUsuario(id);
+            usuario.setIdUsuario((long) id);
             return usuario;
         }
         catch (Exception e) {
