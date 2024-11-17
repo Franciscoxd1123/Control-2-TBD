@@ -39,6 +39,11 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- Botón de Volver -->
+    <button @click="goBack" class="go-back-btn">
+        Volver
+      </button>
   </div>
 </template>
 
@@ -80,6 +85,11 @@ const editarTarea = (idTarea) => {
 onMounted(() => {
   obtenerTareas();
 });
+
+// Método para volver
+const goBack = () => {
+    router.go(-1); // Vuelve a la página anterior
+  };
 </script>
 
 <style scoped>
@@ -120,6 +130,18 @@ button {
 
 button:hover {
   background: #38a169;
+}
+
+.go-back-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: #e74c3c;
+    color: black;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
 }
 
 .error-message {

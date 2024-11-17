@@ -19,7 +19,7 @@ defineProps({
 
     <main class="content">
       <section>
-        <h1>{{ msg }}</h1>
+        <h1 class="welcome-msg">{{ msg }}</h1>
         <p>Selecciona una opción desde la barra lateral para empezar.</p>
       </section>
     </main>
@@ -35,7 +35,7 @@ defineProps({
 .sidebar {
   width: 250px;
   background-color: #2c3e50;
-  color: white;
+  color: orange;
   padding: 1rem;
 }
 
@@ -66,6 +66,10 @@ defineProps({
 .content {
   flex: 1;
   padding: 1rem;
+}
+
+.welcome-msg {
+  color: orange;
 }
 
 .header {

@@ -61,7 +61,6 @@ const handleSubmit = async () => {
   try {
     error.value = ''
     
-    // Validaciones del frontend que coinciden con el backend
     if (!userData.nombre || userData.nombre.trim() === '') {
       error.value = 'El nombre es obligatorio'
       return
@@ -84,7 +83,6 @@ const handleSubmit = async () => {
     }
   } catch (err) {
     console.error('Error de registro:', err)
-    // Mostrar el mensaje de error del backend
     error.value = err.response?.data || 'Error al registrar usuario'
   }
 }
@@ -92,7 +90,7 @@ const handleSubmit = async () => {
 
 <style scoped>
 .register {
-  background: white;
+  background: #2c3e50;
   padding: 2rem;
   border-radius: 0.75rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -101,7 +99,7 @@ const handleSubmit = async () => {
 }
 
 h1 {
-  color: #2d3748;
+  color: orange;
   text-align: center;
   font-size: 1.8rem;
   margin-bottom: 2rem;
@@ -112,28 +110,28 @@ h1 {
 }
 
 .label {
-  color: #2d3748;
+  color: #42b983;
   text-align: center;
   margin-bottom: 0.5rem;
   font-size: 1rem;
 }
 
 input {
-  width: 100%;
+  width: 90%;
   padding: 0.75rem;
-  border: 1px solid #e2e8f0;
+  border: 1px solid orange;
   border-radius: 0.5rem;
   font-size: 0.9rem;
-  background: white;
+  background: black;
   outline: none;
-  color: #000;
+  color: #42b983;
 }
 
 button {
   width: 100%;
   padding: 0.75rem;
   background: #48bb78;
-  color: white;
+  color: black;
   border: none;
   border-radius: 0.5rem;
   font-size: 1rem;

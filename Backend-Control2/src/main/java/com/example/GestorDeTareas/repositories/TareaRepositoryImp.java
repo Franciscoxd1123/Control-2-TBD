@@ -17,22 +17,25 @@ public class TareaRepositoryImp implements TareaRepository{
 
     @Override
     public Tarea create(Tarea tarea){
-        String sql = "INSERT INTO Tareas (titulo, descripcion, estado, fechavencimiento, idusuario) " +
-                "VALUES (:titulo, :descripcion, :estado, :fechavencimiento, :idusuario) " +
-                "RETURNING idtarea";
         try (Connection con = sql2o.open()) {
-            Long id = con.createQuery(sql, true)
+            // Primero insertar y obtener el ID
+            String sql = "INSERT INTO Tareas (titulo, descripcion, estado, fechavencimiento, idusuario) " +
+                    "VALUES (:titulo, :descripcion, :estado, :fechavencimiento, :idusuario) " +
+                    "RETURNING idtarea";
+
+            Integer idTarea = con.createQuery(sql, true)
                     .addParameter("titulo", tarea.getTitulo())
                     .addParameter("descripcion", tarea.getDescripcion())
                     .addParameter("estado", tarea.getEstado())
                     .addParameter("fechavencimiento", tarea.getFechaVencimiento())
                     .addParameter("idusuario", tarea.getIdUsuario())
-                    .executeAndFetchFirst(Long.class);
+                    .executeUpdate()
+                    .getKey(Integer.class);
 
-            tarea.setIdTarea(id);
+            tarea.setIdTarea(Long.valueOf(idTarea));
             return tarea;
-        }
-        catch (Exception e) {
+
+        } catch (Exception e) {
             System.out.println("Error al crear la tarea: " + e.getMessage());
             return null;
         }
