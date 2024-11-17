@@ -52,6 +52,10 @@ public class TareaService {
         return tareaRepository.buscarTareas(estado, palabraClave);
     }
 
+    public List<Tarea> getTareasByUsuario(int idUsuario) {
+        return tareaRepository.getTareasByUsuario(idUsuario);
+    }
+
     // Metodo que se ejecutará diariamente para verificar tareas próximas a vencer
     @Scheduled(cron = "0 0 8 * * *") // Ejecutar todos los días a las 8:00 AM
     public List<Tarea> verificarTareasPorVencer() {
@@ -95,5 +99,4 @@ public class TareaService {
         long diferencia = fechaVencimiento.getTime() - fechaActual.getTime();
         return TimeUnit.DAYS.convert(diferencia, TimeUnit.MILLISECONDS);
     }
-
 }

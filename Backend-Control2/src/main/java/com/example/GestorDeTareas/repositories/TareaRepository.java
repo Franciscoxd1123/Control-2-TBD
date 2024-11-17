@@ -16,4 +16,6 @@ public interface TareaRepository {
     void delete(int id);
 
     List<Tarea> buscarTareas(String estado, String palabraClave);
+
+    List<Tarea> getTareasByUsuario(int idUsuario);
 }

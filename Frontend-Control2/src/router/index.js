@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import LoginView from '../views/LoginView.vue';
 import UserMenuView from '../views/UserMenu.vue';
+import CreateTarea from '../components/CreateTarea.vue';
+import TareasListEdit from '../components/TareasListEdit.vue';
 
 const routes = [
   {
@@ -24,6 +26,16 @@ const routes = [
     path: '/user-menu', 
     name: 'UserMenu',
     component: UserMenuView,
+  },
+  {
+    path: '/create-tarea',
+    name: 'CreateTarea',
+    component: CreateTarea,
+  },
+  {
+    path: '/tareas-list-edit',
+    name: 'TareasListEdit',
+    component: TareasListEdit,
   },
 ];
 

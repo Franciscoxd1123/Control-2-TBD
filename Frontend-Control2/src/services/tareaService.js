@@ -30,6 +30,11 @@ export default {
         });
     },
 
+    // Obtener tareas por idUsuario
+    getTareasByUsuario(idUsuario) {
+        return apiClient.get(`/buscar/${idUsuario}`);
+    },
+
     // Obtener notificaciones para un usuario específico
     obtenerNotificaciones(idUsuario) {
         return apiClient.get(`/notificaciones/${idUsuario}`);

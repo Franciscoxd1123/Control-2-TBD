@@ -12,7 +12,7 @@ public class Sql2oConfig {
         // Configura la conexión a tu base de datos
         String url = "jdbc:postgresql://localhost:5432/GestorDeTareas";
         String username = "postgres";
-        String password = "admin";
+        String password = "MyPostgre74SQL38";
         return new Sql2o(url, username, password);
     }
 }

@@ -41,6 +41,12 @@ public class TareaController {
         return ResponseEntity.ok(tareas);
     }
 
+    @GetMapping("/buscar/{idUsuario}")
+    public ResponseEntity<List<Tarea>> getTareasByUsuario(@PathVariable int idUsuario) {
+        List<Tarea> tareas = tareaService.getTareasByUsuario(idUsuario);
+        return ResponseEntity.ok(tareas);
+    }
+
     @GetMapping("/notificaciones/{idUsuario}")
     public ResponseEntity<List<String>> obtenerNotificaciones(@PathVariable int idUsuario) {
         List<String> notificaciones = tareaService.obtenerNotificaciones(idUsuario);

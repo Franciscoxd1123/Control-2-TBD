@@ -10,8 +10,8 @@ defineProps({
     <aside class="sidebar">
       <h2>Opciones</h2>
       <ul>
-        <li><router-link to="/create-task">Crear tareas</router-link></li>
-        <li><router-link to="/edit-task">Editar tareas</router-link></li>
+        <li><router-link to="/create-tarea">Crear tareas</router-link></li>
+        <li><router-link to="/tareas-list-edit">Editar tareas</router-link></li>
         <li><router-link to="/mark-task">Marcar tareas</router-link></li>
         <li><router-link to="/view-task">Ver tareas</router-link></li>
       </ul>

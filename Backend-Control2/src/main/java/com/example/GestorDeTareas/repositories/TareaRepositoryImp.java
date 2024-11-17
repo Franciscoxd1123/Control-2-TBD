@@ -119,10 +119,25 @@ public class TareaRepositoryImp implements TareaRepository{
             if (palabraClave != null && !palabraClave.isEmpty()) {
                 query.addParameter("palabraClave", "%" + palabraClave + "%");
             }
-
             return query.executeAndFetch(Tarea.class);
+
         } catch (Exception e) {
             System.out.println("Error al buscar tareas: " + e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<Tarea> getTareasByUsuario(int idUsuario) {
+        String sql = "SELECT * FROM Tareas WHERE idusuario = :idUsuario";
+
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .addParameter("idUsuario", idUsuario)
+                    .executeAndFetch(Tarea.class);
+
+        } catch (Exception e) {
+            System.out.println("Error al consultar las tareas del usuario: " + e.getMessage());
             return null;
         }
     }
