@@ -5,6 +5,7 @@ import LoginView from '../views/LoginView.vue';
 import UserMenuView from '../views/UserMenu.vue';
 import CreateTarea from '../components/CreateTarea.vue';
 import TareasListEdit from '../components/TareasListEdit.vue';
+import EditarTareaView from '../views/EditarTareaView.vue';
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: '/tareas-list-edit',
     name: 'TareasListEdit',
     component: TareasListEdit,
+  },
+  {
+    path: '/editar-tarea/:id',
+    name: 'EditarTarea',
+    component: EditarTareaView,
   },
 ];
 

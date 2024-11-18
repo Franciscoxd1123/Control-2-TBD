@@ -33,16 +33,16 @@ INSERT INTO Usuarios (nombre, correo, contrasena, sesionActiva) VALUES
 
 -- Tabla Tareas
 INSERT INTO Tareas (titulo, descripcion, estado, fechaVencimiento, idUsuario) VALUES
-('Revisión de código', 'Revisar el código del último commit', 'pendiente', '2024-11-20', 1),
-('Escribir documentación', 'Crear documentación para el módulo de usuarios', 'pendiente', '2024-11-22', 2),
-('Reunión con el equipo', 'Reunión semanal de planificación', 'completada', '2024-11-15', 3),
-('Pruebas de integración', 'Realizar pruebas de integración en el entorno de staging', 'pendiente', '2024-11-25', 4),
-('Actualización del sistema', 'Actualizar el sistema a la versión 2.1', 'completada', '2024-11-30', 5),
-('Revisión de seguridad', 'Verificar configuraciones de seguridad', 'pendiente', '2024-12-01', 1),
-('Feedback del cliente', 'Recoger feedback del cliente sobre la nueva funcionalidad', 'completada', '2024-11-10', 2),
-('Optimización de la base de datos', 'Optimizar consultas para mejorar el rendimiento', 'pendiente', '2024-12-05', 3),
-('Limpieza de datos', 'Eliminar registros duplicados y datos obsoletos', 'completada', '2024-11-28', 4),
-('Reporte mensual', 'Preparar el reporte de desempeño del mes', 'pendiente', '2024-11-29', 5);
+('Revisión de código', 'Revisar el código del último commit', 'Pendiente', '2024-11-20', 1),
+('Escribir documentación', 'Crear documentación para el módulo de usuarios', 'Pendiente', '2024-11-22', 2),
+('Reunión con el equipo', 'Reunión semanal de planificación', 'Completada', '2024-11-15', 3),
+('Pruebas de integración', 'Realizar pruebas de integración en el entorno de staging', 'Pendiente', '2024-11-25', 4),
+('Actualización del sistema', 'Actualizar el sistema a la versión 2.1', 'Completada', '2024-11-30', 5),
+('Revisión de seguridad', 'Verificar configuraciones de seguridad', 'Pendiente', '2024-12-01', 1),
+('Feedback del cliente', 'Recoger feedback del cliente sobre la nueva funcionalidad', 'Completada', '2024-11-10', 2),
+('Optimización de la base de datos', 'Optimizar consultas para mejorar el rendimiento', 'Pendiente', '2024-12-05', 3),
+('Limpieza de datos', 'Eliminar registros duplicados y datos obsoletos', 'Completada', '2024-11-28', 4),
+('Reporte mensual', 'Preparar el reporte de desempeño del mes', 'Pendiente', '2024-11-29', 5);
 
 Select *
 From Usuarios;

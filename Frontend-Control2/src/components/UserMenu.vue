@@ -1,8 +1,25 @@
 <script setup>
-defineProps({
+import { useRouter } from 'vue-router';
+import usuarioService from '../services/usuarioService';
+
+const props = defineProps({
   msg: String,
 });
 
+const router = useRouter();
+
+const handleLogout = async () => {
+  try {
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    if (usuario?.idUsuario) {
+      await usuarioService.logoutUsuario(usuario.idUsuario);
+    }
+    localStorage.removeItem('usuario');
+    router.push('/');
+  } catch (error) {
+    console.error('Error al cerrar sesión:', error);
+  }
+};
 </script>
 
 <template>
@@ -14,6 +31,11 @@ defineProps({
         <li><router-link to="/tareas-list-edit">Editar tareas</router-link></li>
         <li><router-link to="/mark-task">Marcar tareas</router-link></li>
         <li><router-link to="/view-task">Ver tareas</router-link></li>
+        <li class="logout-item">
+          <button @click="handleLogout" class="logout-button">
+            Cerrar sesión
+          </button>
+        </li>
       </ul>
     </aside>
 
@@ -63,6 +85,25 @@ defineProps({
   color: #1abc9c;
 }
 
+.logout-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #c0392b;
+}
+
+.logout-item {
+  margin-top: 2rem;
+}
+
 .content {
   flex: 1;
   padding: 1rem;
@@ -70,40 +111,5 @@ defineProps({
 
 .welcome-msg {
   color: orange;
-}
-
-.header {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 1rem;
-  background-color: #ecf0f1;
-  border-bottom: 1px solid #ddd;
-}
-
-.notifications {
-  position: relative;
-  cursor: pointer;
-}
-
-.notifications .icon {
-  font-size: 1.5rem;
-}
-
-.notification-dropdown {
-  position: absolute;
-  top: 2rem;
-  right: 0;
-  background-color: white;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  z-index: 10;
-  width: 200px;
-}
-
-.notification-dropdown p {
-  margin: 0;
-  font-size: 1rem;
 }
 </style>
