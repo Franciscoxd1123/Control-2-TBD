@@ -6,6 +6,8 @@ import UserMenuView from '../views/UserMenu.vue';
 import CreateTarea from '../components/CreateTarea.vue';
 import TareasListEdit from '../components/TareasListEdit.vue';
 import EditarTareaView from '../views/EditarTareaView.vue';
+import MarkTask from '../components/MarkTask.vue';
+import ViewTask from '../components/ViewTask.vue';
 
 const routes = [
   {
@@ -39,9 +41,19 @@ const routes = [
     component: TareasListEdit,
   },
   {
+    path: '/mark-task',
+    name: 'MarkTask',
+    component: MarkTask,
+  },
+  {
     path: '/editar-tarea/:id',
     name: 'EditarTarea',
     component: EditarTareaView,
+  },
+  {
+    path: '/view-task',
+    name: 'ViewTask',
+    component: ViewTask,
   },
 ];
 
