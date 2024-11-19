@@ -31,6 +31,7 @@ const handleLogout = async () => {
         <li><router-link to="/tareas-list-edit">Editar tareas</router-link></li>
         <li><router-link to="/mark-task">Marcar tareas</router-link></li>
         <li><router-link to="/view-task">Ver tareas</router-link></li>
+        <li><router-link to="/notifications">Notificaciones</router-link></li>
         <li class="logout-item">
           <button @click="handleLogout" class="logout-button">
             Cerrar sesión

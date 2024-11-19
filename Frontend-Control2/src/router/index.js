@@ -8,6 +8,7 @@ import TareasListEdit from '../components/TareasListEdit.vue';
 import EditarTareaView from '../views/EditarTareaView.vue';
 import MarkTask from '../components/MarkTask.vue';
 import ViewTask from '../components/ViewTask.vue';
+import Notifications from '../components/Notifications.vue';
 
 const routes = [
   {
@@ -54,6 +55,11 @@ const routes = [
     path: '/view-task',
     name: 'ViewTask',
     component: ViewTask,
+  },
+  {
+    path: '/notifications',
+    name: 'Notifications',
+    component: Notifications,
   },
 ];
 
