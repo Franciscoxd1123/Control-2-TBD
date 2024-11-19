@@ -6,12 +6,14 @@
       {{ errorMessage }}
     </div>
 
-    <div v-if="tareasCompletadas.length === 0 && tareasFiltradas.length === 0" class="no-tareas">
-      No tienes tareas creadas.
-    </div>
 
-    <div v-if="tareasFiltradas.length > 0" class="title">Tareas pendientes</div>
-    <table v-if="tareasFiltradas.length > 0">
+    <div class="search-wrapper panel-heading col-sm-12">
+    <input type="text" v-model="search" placeholder="Search" /> <br> <br>
+    </div>  
+
+    <div v-if="listaPendientes.length > 0" class="title">Tareas pendientes</div>
+    <div v-if="listaPendientes.length == 0" class="title">No tienes tareas pendientes</div>
+    <table v-if="tareasFiltradas && listaPendientes.length > 0">
       <thead>
         <tr>
           <th>Título</th>
@@ -21,7 +23,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="tarea in tareasFiltradas" :key="tarea.idTarea">
+        <tr v-for="tarea in listaPendientes" :key="tarea.idTarea">
           <td>{{ tarea.titulo }}</td>
           <td>{{ tarea.descripcion }}</td>
           <td>{{ tarea.estado }}</td>
@@ -30,8 +32,9 @@
       </tbody>
     </table>
 
-    <div v-if="tareasCompletadas.length > 0" class="title">Tareas completadas</div>
-    <table v-if="tareasCompletadas.length > 0">
+    <div v-if="listaCompletadas.length > 0" class="title">Tareas completadas</div>
+    <div v-if="listaCompletadas.length == 0" class="title">No tienes tareas completadas</div>
+    <table v-if="tareasCompletadas && listaCompletadas.length > 0">
       <thead>
         <tr>
           <th>Título</th>
@@ -41,7 +44,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="tarea in tareasCompletadas" :key="tarea.idTarea">
+        <tr v-for="tarea in listaCompletadas" :key="tarea.idTarea">
           <td>{{ tarea.titulo }}</td>
           <td>{{ tarea.descripcion }}</td>
           <td>{{ tarea.estado }}</td>
@@ -57,11 +60,14 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, nextTick } from 'vue';
 import tareaService from '../services/tareaService';
 import { useRouter } from 'vue-router';
 
 const tareas = ref([]);
+const listaPendientes = ref([]);
+const listaCompletadas = ref([]);
+const search = ref('');
 const errorMessage = ref("");
 const filtroPendientes = ref(true);
 const router = useRouter();
@@ -82,21 +88,25 @@ const obtenerTareas = async () => {
 
     const response = await tareaService.getTareasByUsuario(usuario.idUsuario);
     tareas.value = response.data || [];
-    // console.log(tareas.value)
   } catch (error) {
     errorMessage.value = "Error al obtener las tareas: " + error.message;
   }
 };
 
 const tareasFiltradas = computed(() => {
-  if (filtroPendientes.value) {
-    return tareas.value.filter(tarea => tarea.estado === "Pendiente");
-  }
-  return tareas.value;
+    listaPendientes.value = tareas.value.filter(tarea => {
+      let _ = tarea.estado.toLowerCase() === "pendiente" && tarea.titulo.toLowerCase().indexOf(search.value.toLowerCase()) != -1
+      return _
+    });
+    return true
 });
 
 const tareasCompletadas = computed(() => {
-  return tareas.value.filter(tarea => tarea.estado === 'COMPLETADA');
+  listaCompletadas.value = tareas.value.filter((tarea) => {
+      let _ = tarea.estado.toLowerCase() === "completada" && tarea.titulo.toLowerCase().indexOf(search.value.toLowerCase()) != -1
+      return _
+    });
+    return true
 })
 
 const editarTarea = (idTarea) => {

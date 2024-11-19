@@ -44,7 +44,7 @@ public class TareaService {
             throw new IllegalArgumentException("Tarea no encontrada");
         }
 
-        tarea.setEstado("COMPLETADA");
+        tarea.setEstado("Completada");
         return tareaRepository.update(tarea, id);
     }
 

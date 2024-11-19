@@ -47,6 +47,7 @@ import { useRouter } from 'vue-router';
 const tareas = ref([]);
 const errorMessage = ref("");
 const filtroPendientes = ref(true);
+const search = ref('');
 const router = useRouter();
 
 // Formatear fecha
@@ -86,6 +87,7 @@ const terminarTarea = async (idTarea) => {
     try {
       await tareaService.completarTarea(idTarea);
       alert('Tarea actualizada exitosamente.')
+      router.go();
     } catch (e) {
       errorMessage.value = "Error al terminar la tarea: " + e.message;
     }
