@@ -95,7 +95,7 @@ const obtenerTareas = async () => {
 
 const tareasFiltradas = computed(() => {
     listaPendientes.value = tareas.value.filter(tarea => {
-      let _ = tarea.estado.toLowerCase() === "pendiente" && tarea.titulo.toLowerCase().indexOf(search.value.toLowerCase()) != -1
+      let _ = tarea.estado.toLowerCase() === "pendiente" && (tarea.titulo.toLowerCase().indexOf(search.value.toLowerCase()) != -1 || tarea.descripcion.toLowerCase().indexOf(search.value.toLowerCase()) != -1)
       return _
     });
     return true
@@ -103,7 +103,8 @@ const tareasFiltradas = computed(() => {
 
 const tareasCompletadas = computed(() => {
   listaCompletadas.value = tareas.value.filter((tarea) => {
-      let _ = tarea.estado.toLowerCase() === "completada" && tarea.titulo.toLowerCase().indexOf(search.value.toLowerCase()) != -1
+      let _ = tarea.estado.toLowerCase() === "completada" && 
+        (tarea.titulo.toLowerCase().indexOf(search.value.toLowerCase()) != -1 || tarea.descripcion.toLowerCase().indexOf(search.value.toLowerCase()) != -1)
       return _
     });
     return true
